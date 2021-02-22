@@ -46,7 +46,7 @@ module type MATH =
     val max : float list -> float option
   end ;;
 
-  (*......................................................................
+(*......................................................................
 Exercise 1A: Complete the implementation of a module called `Math`
 that satisfies the signature above. Feel free to make use of various
 functions in the `Stdlib` module

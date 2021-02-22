@@ -21,17 +21,19 @@ Part 3: Interfaces as abstraction barriers
 It may feel at first that it's redundant to have both signatures and
 implementations for modules. However, as we saw at the end of Part 2,
 the use of signatures allows defining a set of functionality that
-might be shared between two related (but still different) modules. It
-is also used as a way to hide, within a single module, various helper
-functions or implementation details that we (as the developer of a
-module) would rather not expose. In other words, it provides a rigid
-*abstraction barrier* that when deployed properly makes it impossible
-for a programmer using your module to violate desired invariants.
+might be shared between two related (but still different) modules. 
+
+Another advantage of specifying signatures is that it provides a way
+to hide, within a single module, various helper functions or
+implementation details that we (as the developer of a module) would
+rather not expose. In other words, it provides a rigid *abstraction
+barrier* that when deployed properly makes it impossible for a
+programmer using your module to violate desired invariants.
 
 Let's say we want to build a stack data structure. A stack is similar
-to a queue (as described in Section 12.2) except that the last
-element to be added to it is the first one to be removed. That is, it
-operates as a LIFO (Last-In First-Out) structure.
+to a queue (as described in Section 12.2 of the textbook) except that
+the last element to be added to it is the first one to be
+removed. That is, it operates as a LIFO (Last-In First-Out) structure.
 
 To get started, we can implement stacks using lists. "Push" and "pop"
 are commonly the names of the functions associated with adding an
@@ -43,7 +45,7 @@ pile.)
 
 In imperative programming languages, a "pop" function typically
 *modifies* the stack by removing the topmost element from the stack as
-a side effect and then returns the value of that element. However, in
+a side effect and also returns the value of that element. However, in
 the functional paradigm, side effects are eschewed. As a result, we'll
 separate "pop" into two functions: "top", which returns the topmost
 element from the stack (without removing it), and "pop", which returns
@@ -108,8 +110,8 @@ the list.
 
 ........................................................................
 Exercise 3D: Write a function that, given a stack, returns a stack
-with the elements inverted, *without using any of the `IntListStack`
-methods*.
+with the elements in reverse order, *without using any of the
+`IntListStack` methods*.
 ......................................................................*)
 
 let invert_stack (s : IntListStack.stack) : IntListStack.stack =
@@ -132,23 +134,24 @@ is defined by a list, why not have the power to update it manually?"
 
 Several reasons:
 
-1. As we've just done, it was entirely possible for a user of the module
-   to completely modify a value in its internal representation.  Imagine
-   what would happen for a more complex module that allowed us to break
-   an invariant! From Problem Set 3, what would break if a person could
-   change a zero bignum to set the negative flag? Or construct a list of
-   coefficients some of which are larger than the base?
+1. As we've just done, it was entirely possible for a user of the
+   module to completely modify a value in its internal representation.
+   Imagine what would happen for a more complex module that allowed us
+   to break an invariant! From Problem Set 3, what would break if a
+   person could change a zero bignum to directly set the negative
+   flag? Or construct a list of coefficients some of which are larger
+   than the base?
 
 2. What if the developer of the module wants to change the module
    implementation for a more sophisticated version? Stacks are fairly
-   simple, yet there are multiple reasonable ways of implementing stack
-   regimen. And more complex data structures could certainly need
-   several iterations of implementation before settling on a final
-   version.
+   simple, yet there are multiple reasonable ways of implementing the
+   stack regimen. And more complex data structures could certainly
+   need several iterations of implementation before settling on a
+   final version.
 
 Let's preserve the abstraction barrier by writing an interface for this
 module. The signature will manifest an *abstract* data type for stacks,
-without revealing the concrete implementation type. Because of that
+without revealing the *concrete* implementation type. Because of that
 abstraction barrier, users of modules satisfying the signature will have
 *no access* to the values of the type except through the abstraction
 provided by the functions and values in the signature.
@@ -183,4 +186,5 @@ perform list operations directly on it, which means the stack
 preserves its abstraction barrier.
 ......................................................................*)
 
-let safe_stack () = failwith "not implemented" ;;
+let safe_stack () =
+  failwith "not implemented" ;;

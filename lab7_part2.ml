@@ -27,16 +27,16 @@ convenient way of separating code into separate namespaces when
 writing a large program.
 
 There are other source files included in this lab, other than the
-lab7_partn.ml files. The file color.ml contains an implementation of a
-system for managing colors. (Recall the idea of colors as consisting
-of values for three color channels (red, green, and blue) from lab 5.)
-Take a look at it to see what functions and values it contains,
-including a type for colors, and a means for converting values for the
-three color channels into the abstract color type, extracting the
-channels individually from colors, and converting some standard color
-names to this color representation.
+`lab7_partn.ml` files. The file `color.ml` contains an implementation
+of a system for managing colors. (Recall the idea of colors as
+consisting of values for three color channels (red, green, and blue)
+from lab 5.) Take a look at it to see what functions and values it
+contains, including a type for colors, and a means for converting
+values for the three color channels into the abstract color type,
+extracting the channels individually from colors, and converting some
+standard color names to this color representation.
 
-With the exception of Exercise 2A, you will need to modify **only**
+With the exception of Exercise 2A, you will need to modify *only*
 color.ml to complete the exercises below.
 
     A digression on accessing other modules:
@@ -48,19 +48,19 @@ color.ml to complete the exercises below.
        % ./lab7_part2.byte
 
     The ocamlbuild command should automatically find modules that
-    you've written in the same directory as your source, compile those
-    additional files, and link them to your compiled program. You can
-    then access functions from those files under the module name,
-    which (again) is the name of the file with the first letter
-    capitalized. For instance, if color.ml is in the same directory as
-    lab7_part2.ml (which it probably is), ocamlbuild will find it and
-    use it, since it is referenced through expressions like
-    `Color.red` and the like.
+    you've written that reside in the same directory as your source,
+    compile those additional files, and link them to your compiled
+    program. You can then access functions from those files under the
+    module name, which (again) is the name of the file with the first
+    letter capitalized. For instance, if color.ml is in the same
+    directory as lab7_part2.ml (which it probably is), ocamlbuild will
+    find it and use it, since it is referenced through expressions
+    like `Color.red` and the like.
 
     On the other hand, if you're testing with a top-level REPL, like
-    utop or ocaml, it will not automatically find those modules and
+    utop or ocaml, it will *not* automatically find those modules and
     evaluate them for you. However, you can do so manually yourself
-    with the #mod_use directive, like this:
+    with the `#mod_use` directive, like this:
 
         # #mod_use "color.ml" ;;
 
@@ -72,11 +72,11 @@ color.ml to complete the exercises below.
 
     (Note the capitalized module name.)
 
-    Keep in mind however that the #mod_use and #use directives look
-    only at their argument files, not at any corresponding .mli files,
-    so the modules being used will not be restricted to the signatures
-    in the corresponding .mli files. For that, you'll have to use the
-    compiler (with ocamlbuild for instance).
+    Keep in mind however that the `#mod_use` and `#use` directives
+    look only at their argument files, not at any corresponding `.mli`
+    files, so the modules being used will not be restricted to the
+    signatures in the corresponding `.mli` files. For that, you'll
+    have to use the compiler (with `ocamlbuild` for instance).
 
 ........................................................................
 Exercise 2A: Replace the `0` in the expression below with an
@@ -108,11 +108,11 @@ compile color.ml and run color.byte.
 (*......................................................................
 Exercise 2C:
 
-In the file color.ml, modify the implementation of a color module as
+In the file `color.ml`, modify the implementation of a color module as
 you see fit. Make the design choices that you think would be best for
 a color module implementation. In particular, you should be able to
 come up with a solution that is *much* clearer and more transparent
-than the one currently in color.ml.
+than the one currently in `color.ml`.
 
 To pass the unit tests, you'll want the RGB values for the colors in
 the `color_name` type to have the following values:
@@ -121,7 +121,7 @@ the `color_name` type to have the following values:
     ----|-----|-----|--------
     255 |   0 |   0 | Red
       0 | 255 |   0 | Green
-      0 |  0  | 255 | Blue
+      0 |   0 | 255 | Blue
     255 | 165 |   0 | Orange
     255 | 255 |   0 | Yellow
      75 |   0 | 130 | Indigo
@@ -132,7 +132,7 @@ the `color_name` type to have the following values:
 
 (* Here's the payoff: A user who uses the color module, by virtue of
 having to stay within the color.mli interface, will not notice *any
-difference at all* between the two implementations in color.ml. The
+difference at all* between the implementations in `color.ml`. The
 underlying implementation can be changed any time in any way, so long
 as the functionality provided stays consistent with the signature.
 
